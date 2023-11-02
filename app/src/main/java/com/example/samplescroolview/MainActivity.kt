@@ -43,28 +43,28 @@ fun ScrollView() {
         modifier = Modifier
             .verticalScroll(rememberScrollState())
     ) {
-        // Todo: ここをいい感じに書ければよさそう
-        ArticleList()
-        Spacer(modifier = Modifier.padding(30.dp))
-        ArticleList()
-        Spacer(modifier = Modifier.padding(30.dp))
-        ArticleList()
-        Spacer(modifier = Modifier.padding(30.dp))
-        ArticleList()
-        Spacer(modifier = Modifier.padding(30.dp))
-        ArticleList()
-        Spacer(modifier = Modifier.padding(30.dp))
-        ArticleList()
+        val list1 = listOf("a", "b", "c", "d", "e")
+        val list2 = listOf("1", "2", "3", "4", "5")
+        val list3 = listOf("aa", "bb", "cc", "dd", "ee")
+        val list4 = listOf("a1", "b2", "c3", "d4", "e5")
+        val list5 = listOf("11", "22", "33", "44", "55")
+        val listInList = listOf<List<String>>(list1, list2, list3, list4, list5)
+        ArticleList(listInList)
     }
 }
 
 @Composable
-fun ArticleList() {
-    Column {
-        listOf("a", "b", "c", "d", "e").forEach {
-            Text(text = "ArticleList: $it")
+fun ArticleList(contents: List<List<Any>>) {
+    contents.forEach {
+        Column {
+            Text("Channel")
             Spacer(modifier = Modifier.padding(10.dp))
-            Divider()
+            it.forEach {
+                Text(text = "ArticleList: $it")
+                Spacer(modifier = Modifier.padding(10.dp))
+                Divider()
+            }
         }
+        Spacer(modifier = Modifier.padding(30.dp))
     }
 }
